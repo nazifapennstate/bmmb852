@@ -13,6 +13,8 @@ samtools --version
 
 #samtools 1.22.1
 
+Answer to question: What version is your samtools command in the bioinfo environment? -samtools 1.22.1
+
 ##Show commands needed to create a nested directory structure
 
 mkdir -p project/data/raw/fastq
@@ -27,7 +29,7 @@ touch project/data/raw/fastq/sample_R1.fastq
 
 #Accessing using relative paths 
 
-#This will depend on where your pwd is
+#This will depend on where your pwd is, mine is ~/Desktop/Fall-2025/Applied-Bioinformatics/bmmb852-week1 so I can do the following
 
 cat project/data/raw/sample1.txt
 
