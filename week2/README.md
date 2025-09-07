@@ -40,7 +40,7 @@ Output: 16,674
 
 # Is there a feature type that you may have not heard about before? What is the feature and how is it defined?
 
-Yes, I was not aware of the feature type biological_region, which is used in Ensembl to describe genomic intervals that have a particular property but are not standard gene structures.
+Yes, I was not aware of the feature type biological_region, which is used in Ensembl to help annotate regulatory or functional DNA regions outside of protein-coding genes. Examples include CpG islands and predicted promoter regions.
 
 # What are the top-ten most annotated feature types across the genome?
 
@@ -49,6 +49,7 @@ zgrep -v "^#" Apteryx_haastii.aptHaa1.115.gff3.gz | cut -f3 | sort | uniq -c | s
 ```
 
 Output: 
+```
 337842 exon
 329455 CDS
 135966 biological_region
@@ -59,6 +60,7 @@ Output:
 4183 region
 2537 ncRNA_gene
 2193 lnc_RNA
+```
 
 # Having analyzed this GFF file, does it seem like a complete and well-annotated organism?
 
@@ -66,5 +68,5 @@ The genome appears to be well-annotated but not fully assembled.
 
 # Other insights 
 
-The gene count (~16.6k), presence of multiple transcript types, and diversity of features (coding, non-coding, pseudogenes, CpG islands, promoters) indicate a thorough and biologically realistic annotation. The very high number of sequence regions (4183) shows the genome is fragmented and not at chromosome resolution.
+The gene count (~16.6k), presence of multiple transcript types, and diversity of features (coding, non-coding, pseudogenes, biological region) indicate a thorough annotation. The very high number of sequence regions (4183) shows the genome is fragmented and not at chromosome resolution.
 
