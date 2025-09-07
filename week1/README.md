@@ -1,4 +1,4 @@
-# Week 1 Assignment 
+# Week 1: Set up your system and demonstrate basic UNIX command line actions
 
 # Check samtools version in the bioinfo environment
 
