@@ -6,3 +6,6 @@ Week 1: Set up your system and demonstrate basic UNIX command line actions
 
 
 Week 2: Demonstrate data analysis at UNIX command line
+
+
+Week 3: Visualizing genomic data
