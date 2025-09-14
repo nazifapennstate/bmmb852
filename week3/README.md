@@ -68,13 +68,13 @@ Forward strand (notice the arrow next to Sequence →):
 Reverse strand (notice the arrow next to Sequence ←): 
 <img width="1440" height="450" alt="3" src="https://github.com/user-attachments/assets/9a58a782-b48e-446c-87e3-46d60c97d1d7" />
 
-If viewed in the wrong orientation, start and stop codons appear scrambled and are biologically meaningless.
+In IGV, codons must be read in the correct strand orientation; if viewed on the wrong strand, codons shift out of frame, producing nonsense amino acids and obscuring the true start or stop signals.
 
 ## Visually verify that the first coding sequence of a gene starts with a start codon and that the last coding sequence of a gene ends with a stop codon.
 
-I chose the gene purT. The first CDS begins with the start codon ATG (coding for methionine), shown in green as M in IGV.  
+I chose the gene purT. The first coding sequence begins with the start codon ATG (coding for methionine), shown in green as M in IGV.  
 
 <img width="1440" height="322" alt="start" src="https://github.com/user-attachments/assets/b1a88822-6b14-41ce-a82a-692560bde4d8" />
 
-The last CDS ends with a stop codon TAA, shown in red as **\***.
+The last coding sequence of the gene purT ends with a stop codon TAA, shown in red as **\***.
 <img width="1440" height="352" alt="stop" src="https://github.com/user-attachments/assets/38e5867c-1db2-45c1-abef-ec034c6b2402" />
