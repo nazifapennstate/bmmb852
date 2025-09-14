@@ -25,7 +25,7 @@ file     format  type  num_seqs    sum_len  min_len  avg_len    max_len
 kleb.fa  FASTA   DNA          6  5,694,894    3,478  949,149  5,315,120
 ```
 
-The total genome size is 5,694,894 bp, which includes the 5.3 Mb chromosome plus several smaller plasmids.
+The total genome size is 5,694,894 bp, which includes the 5.3 Mb chromosome plus smaller plasmids.
 
 ## How many features of each type does the GFF file contain?
 
