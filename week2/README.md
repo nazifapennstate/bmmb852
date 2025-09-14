@@ -1,6 +1,6 @@
 # Week 2: Demonstrate data analysis at UNIX command line
 
-## Downloading the GFF3 file
+# Downloading the GFF3 file
 
 You can download it directly from Ensembl using the following command:
 
@@ -66,7 +66,7 @@ Output:
 
 The genome appears to be well-annotated but not fully assembled.
 
-# Other insights 
+# Share any other insights you might note.
 
 The gene count (~16.6k), presence of multiple transcript types, and diversity of features (coding, non-coding, pseudogenes, biological region) indicate a thorough annotation. The very high number of sequence regions (4183) shows the genome is fragmented and not at chromosome resolution.
 
