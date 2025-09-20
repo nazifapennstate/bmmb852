@@ -9,3 +9,6 @@ Week 2: Demonstrate data analysis at UNIX command line
 
 
 Week 3: Visualizing genomic data
+
+
+Week 4: Obtain genomic data via accession numbers
