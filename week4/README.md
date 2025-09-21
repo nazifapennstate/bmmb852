@@ -32,7 +32,11 @@ rm -rf tmp_unzip GCF_000848505.1.zip
 ```bash
 grep -v "^>" ebola.fasta | tr -d '\n' | wc -c
 ```
-The genome is 18959 nucleotides long.
+Output:
+
+```bash
+18959
+```
 
 ## How many features of each type does the GFF file contain?
 
@@ -60,10 +64,12 @@ Output:
 ```bash
 awk '$3=="CDS"{print $5-$4+1, $0}' ebola.gff | sort -nr | head -1
 ```
+Output:
 ```bash
 6639 NC_002549.1	RefSeq	CDS	11581	18219	.	+	0	ID=cds-NP_066251.1;Parent=rna-ZEBOVgp7;Dbxref=GenBank:NP_066251.1,GeneID:911824;Name=NP_066251.1;gbkey=CDS;gene=L;locus_tag=ZEBOVgp7;product=RNA-dependent RNA polymerase;protein_id=NP_066251.1
 (bioinfo) 
 ```
+The longest gene is **L**, with a coding sequence of 6,639 nucleotides. It encodes the RNA-dependent RNA polymerase, the essential enzyme that copies the viral RNA genome and transcribes it into messenger RNAs.  
 
 ## Pick another gene and describe its name and function.
 
