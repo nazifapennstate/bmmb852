@@ -102,7 +102,7 @@ Run FastQC on the downloaded data to generate a quality report.
 
 <img width="1438" height="803" alt="image" src="https://github.com/user-attachments/assets/0a63c177-4d31-4fe0-bff1-f3bf462f4630" />
 
-The FastQC report shows quality drops at the read ends, so trimming low-quality bases is recommended before downstream analysis.
+The FastQC report shows quality drops at the read ends, suggesting low-quality bases could be trimmed.
 
 ## Compare sequencing platforms 
 
