@@ -4,8 +4,5 @@ I was assigned to Group 1, for which the paper was Gire et al. (2014), "Genomic 
 
 As outlined in the Acknowledgements section of the paper, the sequence data for this project are available at NCBI (NCBI BioGroup: PRJNA257197).
 
-Under this bioproject, I picked a random strain (screenshot attached below) for all downstream analysis. 
+Under this bioproject, I picked a random strain (BioSample: SAMN03254248; Sample name: G5844.1; SRA: SRS803773) for all downstream analysis. 
 
-<img width="851" height="376" alt="image" src="https://github.com/user-attachments/assets/3242743f-b2b3-488f-9a34-99af7521872f" />
-
-## Creating a bash shell script 
