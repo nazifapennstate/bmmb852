@@ -87,6 +87,15 @@ echo "Target bases: ${target_bases} -> Spots downloaded: ${spots_needed}"
 echo "Stats: reads/${SRR}_stats.txt ; FastQC HTML in reads/"
 
 ```
+### Coverage calculation in this script
+
+In the Sequence Read Archive (SRA), a spot is the basic sequencing unit. For single-end runs, a spot contains one read, while for paired-end runs, a spot contains a read pair (R1 + R2). This matters because it determines how many bases each spot contributes.
+
+To calculate how much sequencing data was needed, we started with the size of the Ebola genome, about 18,959 base pairs (~19 kb), and aimed for 10× coverage. That equals roughly 190,000 bases in total.
+
+Each spot contributes a certain number of bases depending on read length. For paired-end runs, this means adding the average length of R1 and R2. In this dataset, the pilot download showed that each read was about 101 base pairs long, so each spot contributed about 202 bases.
+
+Dividing the total number of bases needed by the amount contributed per spot gave 939 spots, which the script then downloaded. These appear as 939 reads in R1 and 939 reads in R2, providing the target 10× coverage of the Ebola genome.
 
 ## Quality assessment
 
