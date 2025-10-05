@@ -1,1 +1,1 @@
-# Week 6\nThis folder will contain the Makefile and documentation for the Week 6 assignment.
+# Week 6: Generate a BAM alignment file
