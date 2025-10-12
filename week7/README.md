@@ -1,6 +1,6 @@
 # Week 7: Write a reusable alignment Makefile
 
-This week’s goal was to generalize the Week 6 Makefile so that it can process both Illumina and Oxford Nanopore (ONT) sequencing runs for the Ebola virus reference genome. The pipeline automatically downloads data, aligns reads using the appropriate mapper, and generates coverage tracks for visualization.
+This week’s goal was to generalize the Week 6 Makefile so that it can process both Illumina and Oxford Nanopore (ONT) sequencing runs for the Ebola virus reference genome. The Makefile uploaded performs the following tasks: 
 
 | Target          | Purpose                                                                                                    |
 | --------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -14,7 +14,7 @@ This week’s goal was to generalize the Week 6 Makefile so that it can process 
 | `bigwig`        | Converts BAM coverage to bedGraph and BigWig for IGV visualization                                         |
 | `clean`         | Removes all generated files and directories                                                                |
 
-After activating the `bioinfo` Conda environment, I ran pipeline with the following SRR:
+After activating the `bioinfo` Conda environment, I ran the pipeline with the following SRRs:
 
 ```bash
 # Illumina paired-end
@@ -25,8 +25,7 @@ make all SRR=SRR8959866 LAYOUT=SE PLATFORM=ont SUBSET=
 ```
 
 _Note: In previous assignments, I used `SRR10769653`, which was a **metagenomic GridION ONT run** with spiked primer enrichment.
-However, it showed extremely poor coverage in IGV, so I replaced it with **SRR8959866**, another ONT run with better read depth.
-For this week, I ran the pipeline **without specifying a subset** to see coverage beyond 10×, though the Makefile supports downsampling via `SUBSET=...` if needed (e.g., `SUBSET=100000` for ~10× coverage)._
+However, it showed extremely poor coverage in IGV, so I replaced it with **SRR8959866**, another ONT run with higher read depth and more complete coverage. For this week, I ran the pipeline **without specifying a subset** to see coverage beyond 10×, though the Makefile supports downsampling via `SUBSET=...` if needed (e.g., `SUBSET=100000` for ~10× coverage)._
 
 All results are stored in structured subdirectories:
 
@@ -45,6 +44,13 @@ Illumina short reads are best handled by **BWA-MEM**, which efficiently maps pai
 Oxford Nanopore reads are long, error-prone, and single-end, requiring **minimap2** with the `map-ont` preset optimized for long-read alignments.
 
 ## Briefly describe the differences between the alignment in both files.
+
+The Illumina run (SRR1734993) shows uniform short-read coverage across most of the Ebola genome.
+<img width="1305" height="616" alt="Screenshot 2025-10-12 at 6 10 26 PM" src="https://github.com/user-attachments/assets/b0845ea7-e4b4-4565-83a1-8d3284d0ef18" />
+
+The Nanopore run (SRR8959866) exhibits uneven, amplicon-like coverage, with deep spikes at specific regions broken with large gaps of low or no coverage.
+<img width="1305" height="614" alt="Screenshot 2025-10-12 at 7 09 47 PM" src="https://github.com/user-attachments/assets/afca3f06-6474-4dee-9859-6cdfaa865a01" />
+
 
 ## Briefly compare the statistics for the two BAM files.
 
@@ -95,7 +101,11 @@ The Nanopore run (SRR8959866) shows its maximum coverage (~130k×) at position 8
 
 ## Select a gene of interest. How many alignments on a forward strand cover the gene?
 
-Initially, I triedto identify and quantify gene coverage visually in IGV, but the alignments were too dense and strand separation was not easily interpretable. Instead, I examined the annotation file (genome/ebola.gff) using the less command and selected the first coding gene, NP (nucleoprotein; coordinates 56–3026 on NC_002549.1, forward strand).
+Initially, I tried to identify and quantify gene coverage visually in IGV, but the alignments were too dense and strand separation was not easily interpretable. 
+
+<img width="1547" height="775" alt="Screenshot 2025-10-12 at 7 38 29 PM" src="https://github.com/user-attachments/assets/069b1ce2-7cf8-4e06-be0f-d6171babc913" />
+
+Instead, I examined the annotation file (genome/ebola.gff) using the less command and selected the first coding gene, NP (nucleoprotein; coordinates 56–3026 on NC_002549.1, forward strand).
 
 To quantify forward-strand coverage over this gene, I ran the following command:
 
@@ -115,4 +125,4 @@ SRR1734993	Illumina (PE)	897
 SRR8959866	ONT (SE)	117,142
 ```
 
-The ONT dataset showed far greater read depth over NP, consistent with the much higher overall coverage and single-end strand bias observed in Nanopore amplicon-based sequencing.
+The ONT run had much deeper coverage of NP than the Illumina run. 
