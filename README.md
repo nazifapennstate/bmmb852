@@ -16,3 +16,5 @@ Week 4: Obtain genomic data via accession numbers
 Week 5: Obtain and visualise FASTQ data from SRA
 
 Week 6: Generate a BAM alignment file
+
+Week 7: Write a resusable alignment Makefile
