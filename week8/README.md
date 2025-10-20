@@ -1,7 +1,6 @@
 # Week 8: Automate a large scale analysis
 
-This workflow uses sequencing data from the Gire et al. (2014) *Science* paper on the **2014 West African Ebola outbreak** (BioProject **PRJNA257197**).
----
+This workflow uses sequencing data from the Gire et al. (2014) *Science* paper on the **2014 West African Ebola outbreak** (BioProject **PRJNA257197**). 
 
 ## 1. Building the design.csv file
 
@@ -57,9 +56,9 @@ For this assignment, I treat the full `design.csv` as the input list and let the
 
 ---
 
-## 3. Running the pipeline
+## 3. Automating batch analysis
 
-Once `design.csv` is ready, I use the Makefile to run the full workflow. The Makefile and design.csv should be placed in the same working directory before running the commands. 
+Once `design.csv` is ready, the Makefile can be used to run the full workflow. The Makefile and design.csv should be placed in the same working directory before running the commands. 
 
 _Note on Makefile modification: This Makefile is adapted from my Week 7 workflow, where the Makefile supported both Illumina (BWA MEM) and Oxford Nanopore (minimap2) reads. Since the Gire et al. (2014) dataset contains only Illumina reads, I simplified the Week 7 version by removing the minimap2 steps and related variables. The rest of the structure—indexing, alignment, statistics, and BigWig generation—remains consistent with Week 7 for continuity and reproducibility._
 
@@ -86,7 +85,8 @@ Optional quick testing with a smaller subset:
 ```bash
 make batch DESIGN=design.csv JOBS=4 THREADS=4 SUBSET=100000
 ```
-_Setting SUBSET=100000 means that only the first 100,000 reads are retrieved from each SRA run._
+_Note: setting SUBSET=100000 means that only the first 100,000 reads are retrieved from each SRA run_
+
 ---
 
 ## 4. Output structure
