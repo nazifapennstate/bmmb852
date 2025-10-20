@@ -17,4 +17,6 @@ Week 5: Obtain and visualise FASTQ data from SRA
 
 Week 6: Generate a BAM alignment file
 
-Week 7: Write a resusable alignment Makefile
+Week 7: Write a reusable alignment Makefile
+
+Week 8: Automate a large scale analysis
