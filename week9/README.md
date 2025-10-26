@@ -6,7 +6,7 @@ I wanted something I could execute in **one command** (`make run`) that checks t
 ## 1. Building the `design.csv` file
 
 I started again from BioProject **PRJNA257197** (Gire et al., 2014 *Science*, Ebola outbreak).
-I downloaded the full run metadata and then filtered it down to **one SRR per unique sample**, keeping only **five samples** for speed.
+I downloaded the full run metadata and then filtered it down to **one SRR per unique sample**, keeping only **five samples** so everything runs in under 2 minutes for anyone trying to reproduce my code.
 
 ```bash
 # 1. Fetch SRA RunInfo
