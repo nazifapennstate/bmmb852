@@ -53,20 +53,25 @@ The structure still uses the same logical targets:
 
 ## 3. Running the workflow
 
-To test everything on my five-sample design file, I used:
+To test the pipeline on a single SRR:
+
+```bash
+ make all SRR=SRR1553418 LAYOUT=PE THREADS=4 SUBSET=10000
+```
+
+To test everything on the design file:
 
 ```bash
 make run DESIGN=design.csv JOBS=2 THREADS=2 SUBSET=10000
 ```
 
-Here’s what happens when I run this command:
+The pipeline:
 
-* It checks that all required tools (`bwa`, `samtools`, `bedtools`, `fastqc`, etc.) are installed.
-* If the genome isn’t present, it downloads and indexes it automatically.
-* Then it launches **two jobs in parallel**, each using two threads.
-* `SUBSET=10000` limits the analysis to the first 10,000 reads of each SRR—enough to validate the pipeline quickly.
+* Checks that all required tools (`bwa`, `samtools`, `bedtools`, `fastqc`, etc.) are installed.
+* If the reference genome is missing, it downloads and indexes it automatically.
+* If multiple SRRs are listed in the design file, it launches the specified number of **parallel jobs** (`JOBS=<n>`), each using the defined number of threads (`THREADS=<n>`).
+* `SUBSET=10000` limits processing to the first 10,000 reads per SRR, for example.
 
----
 
 ## 4. Comparing `make run`, `make batch`, and `make all`
 
