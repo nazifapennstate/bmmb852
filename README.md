@@ -22,3 +22,5 @@ Week 7: Write a reusable alignment Makefile
 Week 8: Automate a large scale analysis
 
 Week 9: Revising and improving your automation code
+
+Week 10: Generate a multisample variant call file (VCF)
