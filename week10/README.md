@@ -1,6 +1,6 @@
 # Week 10: Generate a multisample variant call file (VCF)
 
-This version of the Makefile:
+Week 10 builds on the Week 9 pipeline by adding variant calling across multiple Ebola samples and producing a merged multi-sample VCF. Therefore, this version of the Makefile:
 
 * Accepts a `design.csv` file containing Run, Sample, and Layout columns.  
 * Automatically downloads and indexes the reference genome if missing.  
@@ -11,7 +11,12 @@ This version of the Makefile:
 Everything can be executed in **one command**:
 
 ```bash
-make run DESIGN=design.csv JOBS=4 THREADS=4 SUBSET=10000
+make batch THREADS=4 JOBS=4 SUBSET=10000
+````
+By default, the pipeline looks for a file named design.csv in the current directory. If anyone wants to use a different design file, they can specify it explicitly:
+
+```bash
+make batch DESIGN=design.csv THREADS=4 JOBS=4 SUBSET=10000
 ````
 
 ---
@@ -26,16 +31,6 @@ The pipeline separates **technical runs** from **biological samples**:
 | **`SAMPLE`** | Biological or clinical sample identifier: can include multiple SRRs. | `EM096`      |
 
 This distinction ensures that if one sample has several sequencing runs (technical replicates), their data can later be grouped or merged under a single biological name.
-
-For example:
-
-| Run        | Sample | Layout |
-| ---------- | ------ | ------ |
-| SRR1553418 | EM096  | PE     |
-| SRR1553419 | EM096  | PE     |
-
-Here both SRRs map to the same biological sample (`EM096`).
-During batch execution, results are stored in `results/EM096/`, preventing duplication or overwrites.
 
 When testing a single SRR manually, the user can still assign the same name for both:
 
@@ -53,12 +48,14 @@ Initially, I ran the workflow on a few SRRs from the *Gire et al.*, 2014 *Scienc
 Some SRRs produced very low mapping percentages.
 
 **Example of poor coverage (initial SRRs):**
+<img width="729" height="392" alt="Screenshot 2025-11-02 at 8 40 23 PM" src="https://github.com/user-attachments/assets/450cb6f9-67f1-4be9-92ac-eb0063abe3c0" />
 
 
 After inspecting `*_alignment_stats.txt` and `samtools flagstat` results, I swapped out those low-coverage SRRs for better ones.
 
 **Improved coverage (final dataset):**
 
+<img width="1436" height="739" alt="Screenshot 2025-11-02 at 10 58 55 PM" src="https://github.com/user-attachments/assets/53095cf0-e2aa-49cd-87a9-b3580eac3f35" />
 
 
 ## 4. Running the Pipeline
@@ -115,7 +112,7 @@ results/merged/             # merged multi-sample VCF
 
 ---
 
-## 7. Key Commands Recap
+## 7. Key Commands
 
 | Command             | Description                      |
 | ------------------- | -------------------------------- |
