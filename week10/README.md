@@ -95,7 +95,6 @@ results/<Sample>/           # per-sample results
   └── <Sample>.vcf.gz
 results/merged/             # merged multi-sample VCF
   └── merged.vcf.gz
-.tmp/                       # cleaned design.csv (temporary)
 ```
 
 ---

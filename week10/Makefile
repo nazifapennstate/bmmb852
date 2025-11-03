@@ -39,7 +39,6 @@ READS_DIR    = reads
 RESULTS_DIR  = results/$(SAMPLE)
 MERGED_DIR   = results/merged
 SRA_CACHE    = $(HOME)/ncbi/public/sra
-TMP_DIR      = .tmp
 
 # -------------------------------------
 # Files
@@ -85,7 +84,7 @@ BCFTOOLS     = bcftools
 TABIX        = tabix
 PARALLEL     ?= parallel --eta --bar --lb --keep-order
 
-.PHONY: help run setup-genome index fastq qc align stats bigwig vcf vcf_stats all batch one clean toolcheck multisample vcf_list _clean_csv _ensure_dirs
+.PHONY: help run setup-genome index fastq qc align stats bigwig vcf vcf_stats all batch one clean toolcheck multisample vcf_list _ensure_dirs
 
 # -------------------------------------
 # Help
@@ -117,7 +116,7 @@ toolcheck:
 # -------------------------------------
 $(GENOME):
 	@echo "Downloading reference genome for $(REF_ASM)..."
-	@mkdir -p $(GENOME_DIR) $(TMP_DIR)
+	@mkdir -p $(GENOME_DIR)
 	@ok=0; \
 	for i in $$(seq 1 $(DOWNLOAD_RETRIES)); do \
 	  echo "Attempt $$i via NCBI datasets..."; \
@@ -226,22 +225,20 @@ vcf_stats: vcf
 all: qc stats bigwig vcf vcf_stats
 
 # -------------------------------------
-# Batch
+# Batch (no temp file; stream-clean design.csv)
 # -------------------------------------
-_clean_csv: _ensure_dirs
-	@awk 'NR==1{print}' $(DESIGN) > $(TMP_DIR)/design.clean.csv
-	@tail -n +2 $(DESIGN) | perl -pe "s/\r//" | sed '/^[[:space:]]*$$/d' >> $(TMP_DIR)/design.clean.csv
-
-batch: toolcheck _clean_csv
+batch: toolcheck
 	@if [ ! -f "$(GENOME)" ]; then \
 	  echo "Genome not found; downloading..."; \
 	  $(MAKE) setup-genome REF_ASM=$(REF_ASM) THREADS=$(THREADS); \
 	fi
 	@echo "Running batch for all samples in $(DESIGN)..."
-	@$(PARALLEL) --colsep ',' --header : --halt now,fail=0 -j $(JOBS) \
-	  '$(MAKE) all SRR={$(DESIGN_RUN)} SAMPLE={$(DESIGN_SAMPLE)} LAYOUT={$(DESIGN_LAYOUT)} THREADS=$(THREADS) SUBSET=$(SUBSET) REF_ASM=$(REF_ASM)' \
-	  :::: $(TMP_DIR)/design.clean.csv
+	@{ \
+	  awk 'NR==1{print; next} NF' $(DESIGN) | perl -pe 's/\r//;/^\s*$$/d'; \
+	} | $(PARALLEL) --colsep ',' --header : --halt now,fail=0 -j $(JOBS) \
+	  '$(MAKE) all SRR={$(DESIGN_RUN)} SAMPLE={$(DESIGN_SAMPLE)} LAYOUT={$(DESIGN_LAYOUT)} THREADS=$(THREADS) SUBSET=$(SUBSET) REF_ASM=$(REF_ASM)'
 	@echo "Merging all per-sample VCFs..."
+	@awk -F',' 'NR>1 && NF {gsub(/\r/,""); printf "results/%s/%s.vcf.gz\n",$$2,$$2}' $(DESIGN) > $(VCF_LIST)
 	@$(MAKE) multisample
 	@echo "All done. Merged VCF: $(MERGED_VCF)"
 
@@ -250,7 +247,9 @@ batch: toolcheck _clean_csv
 # -------------------------------------
 vcf_list:
 	@mkdir -p $(MERGED_DIR)
-	@awk -F',' 'NR>1 {printf "results/%s/%s.vcf.gz\n",$$2,$$2}' $(TMP_DIR)/design.clean.csv > $(VCF_LIST)
+	@awk -F',' 'NR>1 && NF {gsub(/\r/,""); printf "results/%s/%s.vcf.gz\n",$$2,$$2}' $(DESIGN) > $(VCF_LIST)
+	@echo "VCFs:"
+	@cat $(VCF_LIST)
 
 multisample: vcf_list
 	@$(BCFTOOLS) merge -l $(VCF_LIST) -Oz -o $(MERGED_VCF)
@@ -266,8 +265,8 @@ one:
 # Utility
 # -------------------------------------
 _ensure_dirs:
-	@mkdir -p $(READS_DIR) $(GENOME_DIR) $(MERGED_DIR) $(TMP_DIR)
+	@mkdir -p $(READS_DIR) $(GENOME_DIR) $(MERGED_DIR)
 
 clean:
-	@rm -rf $(READS_DIR) results $(GENOME_DIR) $(TMP_DIR)
+	@rm -rf $(READS_DIR) results $(GENOME_DIR)
 	@rm -f $(GENOME).fai $(CHROMSIZES)
