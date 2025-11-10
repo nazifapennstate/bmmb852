@@ -1,6 +1,6 @@
 # Week 11: Establish the effects of variants
 
-I ran my Makefile pipeline with `make batch`. That:
+I ran my Makefile with `make batch`. That:
 
 * pulled the Ebola reference (`GCF_000848505.1`) and indexed it,
 * downloaded each of the samples' reads from SRA,
@@ -58,15 +58,19 @@ done < design.csv
 
 ## What the output shows:
 
+<img width="1376" height="304" alt="image" src="https://github.com/user-attachments/assets/fa1f60e7-5479-419d-8ea4-3744d771e26e" />
 
 ## Column key (for `all_variants_annotated.tsv`)
 
-* **Sample** — which sample the call came from (e.g., EM096).
-* **CHROM** — contig name; here it’s the Ebola genome (`NC_002549.1`).
-* **POS** — 1-based genomic position of the variant.
-* **REF / ALT** — reference and alternate allele(s).
-* **QUAL** — Phred-scaled variant quality from bcftools (higher → more confident call).
-* **Effect** — snpEff’s top-ranked consequence for that allele (e.g., `5_prime_UTR_variant`, `synonymous_variant`, `missense_variant`).
-* **Impact** — snpEff’s coarse severity bucket (`MODIFIER`, `LOW`, `MODERATE`, `HIGH`).
-* **Gene** — the affected gene per annotation (e.g., `NP`, `VP35`, etc.).
-* **Annotation** — the **full snpEff ANN field**: It includes the effect, impact, gene, transcript, coding change (e.g., `c.22A>G`) and protein change (e.g., `p.Ile8Val`).
+| Column         | Description                                                                                                   | Example                                              | Interpretation                                                                                |
+| :------------- | :------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------- | :-------------------------------------------------------------------------------------------- |
+| **Sample**     | Sample ID from `design.csv`. Identifies which isolate the variant came from.                                  | `EM096`                                              | Variant detected in sample EM096.                                                             |
+| **CHROM**      | Reference contig or chromosome name.                                                                          | `NC_002549.1`                                        | All variants are aligned to the same Ebola reference genome.                                  |
+| **POS**        | Genomic position (1-based).                                                                                   | `491`                                                | Variant occurs at nucleotide 491 of the reference genome.                                     |
+| **REF**        | Reference base.                                                                                               | `A`                                                  | Base present in the reference genome.                                                         |
+| **ALT**        | Alternate base in the sample.                                                                                 | `G`                                                  | Base found in the sample instead of reference.                                                |
+| **QUAL**       | Phred-scaled quality score. Higher = greater confidence.                                                      | `225.4`                                              | High-confidence variant call.                                                                 |
+| **Effect**     | Predicted functional effect from snpEff.                                                                      | `missense_variant`                                   | Describes the type of change (missense, synonymous, UTR, etc.).                               |
+| **Impact**     | Severity category assigned by snpEff.                                                                         | `MODERATE`                                           | `MODIFIER` = non-coding, `LOW` = silent, `MODERATE` = amino-acid change, `HIGH` = disruptive. |
+| **Gene**       | Gene affected by the variant.                                                                                 | `NP`                                                 | NP = nucleoprotein                            |
+| **Annotation** | Full snpEff annotation (pipe-separated fields). Includes transcript, coding change, and protein substitution. | `A\|missense_variant\|MODERATE\|NP\|...p.Ile8Val...` | Provides the detailed predicted consequence on the gene/protein.                              |
