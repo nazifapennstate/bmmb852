@@ -26,3 +26,5 @@ Week 9: Revising and improving your automation code
 Week 10: Generate a multisample variant call file (VCF)
 
 Week 11: Establish the effects of variants 
+
+Week 12: Evaluate data from the Cancer Genome in a Bottle project (Evaluate alignments across sequencing platforms)
