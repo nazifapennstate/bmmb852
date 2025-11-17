@@ -93,20 +93,16 @@ Below are representative IGV screenshots from the KRAS region
 (`chr12:25205246–25250936`) for each sequencing platform:
 
 ### **Illumina (NYGC 118×)**
-
-
+<img width="2048" height="1002" alt="image" src="https://github.com/user-attachments/assets/6ad47090-9d7b-41c1-867e-19ebc23d309d" />
 
 ### **Element AVITI (77×)**
-
-
+<img width="2048" height="1210" alt="image" src="https://github.com/user-attachments/assets/f55fcf8b-cc37-4593-8c95-6fe620986765" />
 
 ### **PacBio HiFi Revio (35×)**
-
+<img width="2048" height="973" alt="image" src="https://github.com/user-attachments/assets/965c20d7-cc8c-488f-b9d8-cc9c99063820" />
 
 ---
 
 ## Interpretation
 
-* **Illumina** provides the highest and most uniform coverage across KRAS.
-* **Element AVITI** shows slightly reduced depth but similarly strong mapping quality.
-* **PacBio HiFi** has lower depth but produces long, highly accurate reads.
+Illumina provided the highest depth, Element showed the strongest short-read alignment metrics, and PacBio HiFi produced the most accurate long-read alignments despite lower coverage.
