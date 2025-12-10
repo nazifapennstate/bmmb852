@@ -95,13 +95,11 @@ FeatureCounts produces columns:
 | **Length**                  | Total exon length                              |
 | **HBR / UHR columns**       | Number of reads overlapping exons of that gene |
 
+<img width="841" height="184" alt="Screenshot 2025-12-09 at 11 20 28 PM" src="https://github.com/user-attachments/assets/d6956125-b0c4-45db-b8f3-709e76ad5e02" />
 
-```
+## 5. IGV Visualisation
 
-→ gene expressed in UHR_1 and UHR_2, absent in HBR samples.
-
-## 5. IGV Verification
-
+<img width="1431" height="436" alt="image" src="https://github.com/user-attachments/assets/90c55a0e-334b-4fc5-a501-b0fd67cd8fd7" />
 
 * **Exon-restricted coverage patterns** → confirms RNA-Seq
 * **Higher peaks in UHR vs HBR for some genes** → matches count matrix
@@ -117,6 +115,4 @@ This Makefile can be reused for **any** single-end RNA-Seq dataset as long as:
    ```
    <sample>_R1.fq
    ```
-3. The **reference genome (REF)** and **annotation (GTF)** variables are changed to point to the correct organism or genomic region
-
-No other modifications are required — the pipeline automatically runs alignment, BigWig generation, and featureCounts across all samples listed in the design file.
+3. The **reference genome (REF)** and **annotation (GTF)** variables are changed to point to the correct organism or genomic region.
