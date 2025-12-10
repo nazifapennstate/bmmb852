@@ -100,11 +100,23 @@ FeatureCounts produces columns:
 
 → gene expressed in UHR_1 and UHR_2, absent in HBR samples.
 
----
-
 ## 5. IGV Verification
 
 
 * **Exon-restricted coverage patterns** → confirms RNA-Seq
 * **Higher peaks in UHR vs HBR for some genes** → matches count matrix
 * **Sharp intron dropouts** → typical of spliced mRNA
+
+## 6. Using This Workflow With Other RNA-Seq Data
+
+This Makefile can be reused for **any** single-end RNA-Seq dataset as long as:
+
+1. **design.csv** is updated with new sample names
+2. FASTQ files are placed in `reads/` and follow the naming pattern:
+
+   ```
+   <sample>_R1.fq
+   ```
+3. The **reference genome (REF)** and **annotation (GTF)** variables are changed to point to the correct organism or genomic region
+
+No other modifications are required — the pipeline automatically runs alignment, BigWig generation, and featureCounts across all samples listed in the design file.
