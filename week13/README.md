@@ -1,12 +1,6 @@
 ## Week 13: Generate an RNA-Seq count matrix
 
-For this assignment, I created an automated RNA-Seq workflow comparing **Universal Human Reference (UHR)** RNA vs **Human Brain Reference (HBR)** RNA using the chr22 subset from the *Biostar Handbook*. Running:
-
-```bash
-make
-```
-
-executes the full pipeline: alignment → BigWig coverage → gene-level count matrix.
+For this assignment, I created an automated RNA-Seq workflow comparing **Universal Human Reference (UHR)** RNA vs **Human Brain Reference (HBR)** RNA using the chr22 subset from the *Biostar Handbook*. 
 
 ---
 
@@ -54,8 +48,24 @@ UHR_3,UHR
 The Makefile uses the `sample` column to locate FASTQ files and generate outputs automatically.
 
 ---
+## 3. What the Makefile does
 
-## 3. Pipeline Overview (Makefile)
+Running:
+
+```bash
+make
+```
+
+executes the full pipeline: alignment → BigWig coverage → gene-level count matrix.
+
+| Command          | What It Does                        |
+| ---------------- | ----------------------------------- |
+| `make`           | Run **entire** pipeline end-to-end  |
+| `make toolcheck` | Ensure required tools exist         |
+| `make align`     | Produce BAM + BAI files             |
+| `make bigwig`    | Produce .bw coverage tracks for IGV |
+| `make counts`    | Generate the RNA-Seq count matrix   |
+| `make clean`     | Remove output directories           |
 
 ### **Alignment**
 
@@ -97,6 +107,8 @@ FeatureCounts produces columns:
 
 <img width="841" height="184" alt="Screenshot 2025-12-09 at 11 20 28 PM" src="https://github.com/user-attachments/assets/d6956125-b0c4-45db-b8f3-709e76ad5e02" />
 
+Many early chr22 genes show 0 counts in all samples, meaning these loci simply aren’t expressed in UHR or HBR. Farther down the matrix, some genes show higher counts in UHR than HBR, which matches what we see in the IGV coverage tracks.
+
 ## 5. IGV Visualisation
 
 <img width="1431" height="436" alt="image" src="https://github.com/user-attachments/assets/90c55a0e-334b-4fc5-a501-b0fd67cd8fd7" />
@@ -105,7 +117,7 @@ FeatureCounts produces columns:
 * **Higher peaks in UHR vs HBR for some genes** → matches count matrix
 * **Sharp intron dropouts** → typical of spliced mRNA
 
-## 6. Using This Workflow With Other RNA-Seq Data
+## 6. Using This Makefile With Other RNA-Seq Data
 
 This Makefile can be reused for **any** single-end RNA-Seq dataset as long as:
 
