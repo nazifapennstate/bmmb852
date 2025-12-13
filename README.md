@@ -30,3 +30,5 @@ Week 11: Establish the effects of variants
 Week 12: Evaluate data from the Cancer Genome in a Bottle project 
 
 Week 13: Generate an RNA-Seq count matrix
+
+Week 14: Perform an RNA-Seq differential gene expression study
