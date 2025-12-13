@@ -31,6 +31,8 @@ Genes with **FDR < 0.05** were considered differentially expressed and carried f
 
 ## PCA Visualization
 
+<img width="1758" height="530" alt="image" src="https://github.com/user-attachments/assets/8bf9633f-8267-4b7f-a597-24ceb9b926a2" />
+
 A PCA plot generated from the edgeR results shows **clear separation between HBR and UHR samples along PC1**, which explains **~97% of the variance**.
 
 * Replicates cluster tightly within groups
@@ -43,10 +45,14 @@ Overall, the PCA confirms that transcriptomic differences between UHR and HBR do
 
 ## Heatmap of Differentially Expressed Genes
 
+<img width="1240" height="1338" alt="image" src="https://github.com/user-attachments/assets/4acfc72c-56e2-41b4-bc0b-5a6734964653" />
+
 A heatmap of differentially expressed genes reveals two major gene clusters:
 
 * Genes **up-regulated in UHR** and down-regulated in HBR
 * Genes **up-regulated in HBR** and down-regulated in UHR
+
+Expression patterns are highly consistent across replicates, supporting the robustness of the differential expression results.
 
 ---
 
@@ -61,6 +67,7 @@ Enrichment results are provided in:
 ```
 results/gprofiler.csv
 ```
+<img width="2048" height="696" alt="image" src="https://github.com/user-attachments/assets/adb81729-8439-478d-bdd1-13d60f63b36b" />
 
 ---
 
